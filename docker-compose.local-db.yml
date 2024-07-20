@@ -17,13 +17,16 @@ services:
 
   db:
     restart: always
-    image: postgres:15-alpine
-    ports:
-      - "5432:5432"
+    image: misskey-db:latest
+    build:
+      context: .
+      dockerfile: pg.Dockerfile
     env_file:
       - .config/docker.env
     volumes:
       - ./db:/var/lib/postgresql/data
+      - ./pgrman_scripts/backup_script.sh:/usr/local/bin/backup_script.sh:ro
+      - /media/myusb/mbackup:/var/lib/mbackup
     healthcheck:
       test: "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"
       interval: 5s
