@@ -7,7 +7,15 @@ export class SuspensionStateInsteadOfIsSspended1716345771510 {
     name = 'SuspensionStateInsteadOfIsSspended1716345771510'
 
     async up(queryRunner) {
-        await queryRunner.query(`CREATE TYPE "public"."instance_suspensionstate_enum" AS ENUM('none', 'manuallySuspended', 'goneSuspended', 'autoSuspendedForNotResponding')`);
+        await queryRunner.query(`
+            DO $$
+            BEGIN
+                IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'instance_suspensionstate_enum') THEN
+                    CREATE TYPE "public"."instance_suspensionstate_enum" AS ENUM('none', 'manuallySuspended', 'goneSuspended', 'autoSuspendedForNotResponding');
+                END IF;
+            END
+            $$;
+        `);
 
         await queryRunner.query(`DROP INDEX "public"."IDX_34500da2e38ac393f7bb6b299c"`);
 
@@ -48,3 +56,4 @@ export class SuspensionStateInsteadOfIsSspended1716345771510 {
         await queryRunner.query(`DROP TYPE "public"."instance_suspensionstate_enum"`);
     }
 }
+
