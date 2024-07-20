@@ -188,6 +188,7 @@ defineExpose({
 		width: 500px;
 		height: 100vh;
 		background: var(--accent);
+		display: none;
 
 		> .banner {
 			position: absolute;
@@ -220,6 +221,7 @@ defineExpose({
 			> .wide {
 				line-height: 50px;
 				padding: 0 16px;
+				display: none;
 
 				> .link {
 					padding: 0 16px;
