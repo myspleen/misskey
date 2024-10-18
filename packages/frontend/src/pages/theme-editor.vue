@@ -79,6 +79,8 @@ import tinycolor from 'tinycolor2';
 import { v4 as uuid } from 'uuid';
 import JSON5 from 'json5';
 
+import lightTheme from '@@/themes/_light.json5';
+import darkTheme from '@@/themes/_dark.json5';
 import MkButton from '@/components/MkButton.vue';
 import MkCodeEditor from '@/components/MkCodeEditor.vue';
 import MkTextarea from '@/components/MkTextarea.vue';
@@ -268,7 +270,7 @@ definePageMetadata(() => ({
 				}
 
 				&.active {
-					box-shadow: 0 0 0 2px var(--divider) inset;
+					box-shadow: 0 0 0 2px var(--MI_THEME-divider) inset;
 				}
 
 				&.rounded {
