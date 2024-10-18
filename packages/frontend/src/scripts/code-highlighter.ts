@@ -14,8 +14,8 @@ import { deepClone } from './clone.js';
 import { deepMerge } from './merge.js';
 import type { HighlighterCore, LanguageRegistration, ThemeRegistration, ThemeRegistrationRaw } from 'shiki/core';
 import { ColdDeviceStorage } from '@/store.js';
-import lightTheme from '@/themes/estampie-light.json5';
-import darkTheme from '@/themes/estampie-dark.json5';
+import lightTheme from '@@/themes/estampie-dark.json5;
+import darkTheme from '@@/themes/estampie-dark.json5';
 
 let _highlighter: HighlighterCore | null = null;
 
