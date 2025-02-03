@@ -8,14 +8,13 @@ ENTRYPOINT ["/tini", "--"]
 
 # PGroonga install
 ENV PGROONGA_VERSION=3.1.1-1
-RUN apt update && apt install -y -V wget && \
-    wget -O- https://packages.groonga.org/debian/groonga-apt-source-latest-bookworm.deb | apt-key add - && \
-    wget https://packages.groonga.org/debian/groonga-apt-source-latest-bookworm.deb && \
+RUN apt update && apt install -y -V wget curl gnupg && \
+    curl -fsSL https://packages.groonga.org/debian/groonga-apt-source-latest-bookworm.deb -o groonga-apt-source-latest-bookworm.deb && \
     apt install -y -V ./groonga-apt-source-latest-bookworm.deb && \
     rm groonga-apt-source-latest-bookworm.deb && \
     apt update && \
     apt install -y -V \
-        postgresql-15-pgdg-pgroonga=3.1.1-1 \
+        postgresql-15-pgdg-pgroonga=${PGROONGA_VERSION} \
         groonga-normalizer-mysql \
         groonga-token-filter-stem \
         groonga-tokenizer-mecab && \
