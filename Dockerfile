@@ -7,7 +7,6 @@ ARG NODE_VERSION=22.11.0-bookworm
 FROM --platform=$BUILDPLATFORM node:${NODE_VERSION} AS native-builder
 
 ENV COREPACK_DEFAULT_TO_LATEST=0
-RUN corepack prepare pnpm@10.0.0 --activate
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 	--mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -46,6 +45,8 @@ RUN rm -rf .git/
 # build native dependencies for target platform
 
 FROM --platform=$TARGETPLATFORM node:${NODE_VERSION} AS target-builder
+
+ENV COREPACK_DEFAULT_TO_LATEST=0
 
 RUN apt-get update \
 	&& apt-get install -yqq --no-install-recommends \
