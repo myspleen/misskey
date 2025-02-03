@@ -9,10 +9,6 @@ ENTRYPOINT ["/tini", "--"]
 # PGroonga install
 ENV PGROONGA_VERSION=3.1.1-1
 RUN apt update && apt install -y -V wget && \
-    wget -O- https://apache.jfrog.io/artifactory/api/gpg/key/public | apt-key add - && \
-    wget https://apache.jfrog.io/artifactory/arrow/debian/apache-arrow-apt-source-latest-bookworm.deb && \
-    apt install -y -V ./apache-arrow-apt-source-latest-bookworm.deb && \
-    rm apache-arrow-apt-source-latest-bookworm.deb && \
     wget -O- https://packages.groonga.org/debian/groonga-apt-source-latest-bookworm.deb | apt-key add - && \
     wget https://packages.groonga.org/debian/groonga-apt-source-latest-bookworm.deb && \
     apt install -y -V ./groonga-apt-source-latest-bookworm.deb && \
